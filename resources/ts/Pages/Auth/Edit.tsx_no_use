@@ -1,0 +1,135 @@
+import React, { useEffect, useState } from "react";
+import { useParams,useNavigate } from 'react-router-dom';
+import userServices from "./User";
+import USER_ROLE from "../../const"
+
+const Edit: React.FC = () => {
+    const [id, setId] = useState(0);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password_raw, setPassword_raw] = useState("");
+    const [role, setRole] = useState(0);
+    const param = useParams().id;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchDataUser() {
+            const res = await userServices.get(param);
+            const data = res;
+            setId(data.id);
+            setName(data.name);
+            setEmail(data.email);
+            setPassword_raw(data.password_raw);
+            setRole(data.role);
+        }
+        fetchDataUser();
+
+    }, []);
+
+    const updateUser = async () => {
+        const data = {
+            id,
+            name,
+            email,
+            password_raw,
+            role
+        };
+
+        const res = await userServices.update(data);
+        navigate('/crud/list');
+
+        // if (res.success) {
+        //     alert("Data updated.");
+        // } else {
+        //     alert("Not updated");
+        // }
+    };
+
+    return (
+        <div>
+            <h4>Edit </h4>
+            <hr />
+            <div className="row">
+                <div className="col-md-6 mb-3">
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={name}
+                        onChange={event => setName(event.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6 mb-3">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        placeholder="you@example.com"
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6 mb-3">
+                    <label>Password_raw </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="********"
+                        value={password_raw}
+                        onChange={event => setPassword_raw(event.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6 mb-3">
+                    <label>Role</label>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-3 mb-3">
+                    <label>
+                        <input
+                        type="radio"
+                        value={USER_ROLE.admin}
+                        checked={role <= USER_ROLE.admin}
+                        onChange={event => setRole(parseInt(event.target.value))}
+                        />
+                        Admin
+                    </label>
+                </div>
+                <div className="col-md-3 mb-3">
+                    <label>
+                        <input
+                        type="radio"
+                        value={USER_ROLE.user}
+                        checked={role == USER_ROLE.user}
+                        onChange={event => setRole(parseInt(event.target.value))}
+                        />
+                        User
+                    </label>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-6 mb-3">
+                    <button
+                        onClick={() => updateUser()}
+                        className="btn btn-primary btn-block"
+                        type="submit"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Edit;

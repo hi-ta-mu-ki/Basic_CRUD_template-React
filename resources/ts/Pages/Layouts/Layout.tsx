@@ -8,7 +8,9 @@ const Layout: React.FC = () => {
                 <h3>Menu</h3>
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><Link to="/logout" className="link-dark d-inline-flex text-decoration-none rounded">Logout</Link></li>
-                    <li><Link to="/crud/dashboard" className="link-dark d-inline-flex text-decoration-none rounded">Dashboard</Link></li>
+                    <li><Link to="/crud/user" className="link-dark d-inline-flex text-decoration-none rounded">User</Link></li>
+                    <li><Link to="/crud/a_master" className="link-dark d-inline-flex text-decoration-none rounded">A_master</Link></li>
+                    <li><Link to="/crud/b_master" className="link-dark d-inline-flex text-decoration-none rounded">B_master</Link></li>
                 </ul>
             </div>
 

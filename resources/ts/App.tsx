@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './Pages/Auth/Login';
 import Layout from './Pages/Layouts/Layout';
-import Dashboard from './Pages/Layouts/Dashboard';
+import UserList from './Pages/Auth/List';
+// import Edit from './Pages/Auth/Edit';
+import A_MasterList from './Pages/A_master/List';
+import B_MasterList from './Pages/B_master/List';
 
 const App: React.FC = () => {
   const isAuthenticated = true; // ログイン状態に応じて変更
@@ -17,7 +20,10 @@ const App: React.FC = () => {
                         <PrivateRoute isAuthenticated={isAuthenticated}>
                             <Routes>
                                 <Route path="/" element={<Layout />}>
-                                    <Route path="/dashboard" element={<Dashboard />} />
+                                    <Route path="/user" element={<UserList />} />
+                                    {/* <Route path="/edit/:id" element={<Edit />} /> */}
+                                    <Route path="/a_master" element={<A_MasterList />} />
+                                    <Route path="/b_master" element={<B_MasterList />} />
                                 </Route>
                             </Routes>
                         </PrivateRoute>
