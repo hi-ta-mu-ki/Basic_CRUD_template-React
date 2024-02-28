@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useRole } from '../../UserContext';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { setRole } = useRole();
 
     const handleLogin = async () => {
         axios.get('/sanctum/csrf-cookie')
@@ -16,6 +18,7 @@ const Login: React.FC = () => {
                         }).then((res)=>{
                             console.log('login response:'+res.data.message);
                             console.log('login status:'+res.data.status);
+                            setRole(res.data.role);
                             if(res.data.status==200){
                                 navigate('/crud');
                             }

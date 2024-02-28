@@ -1,7 +1,6 @@
 import React, { useEffect,useState } from "react";
 import Modal from 'react-bootstrap/Modal';
-import USER_ROLE from "../../const"
-import { UserData } from "../../const"
+import USER_ROLE, { UserData } from "../../const"
 
 type EditProps = {
     isOpen: boolean;

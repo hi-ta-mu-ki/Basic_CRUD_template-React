@@ -15,6 +15,7 @@ interface AddData {
     password_raw: string;
     role: number;
 }
+
 const crudApi = {
     create: async (data: AddData): Promise<any> => {
         const urlSave: string = baseUrl + "/create";

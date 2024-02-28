@@ -11,6 +11,7 @@ interface AddData {
     name: string;
     price: number;
 }
+
 const crudApi = {
     create: async (data: AddData): Promise<any> => {
         const urlSave: string = baseUrl + "/create";

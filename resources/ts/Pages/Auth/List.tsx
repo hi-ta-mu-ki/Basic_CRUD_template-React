@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import crudApi from "./CrudApi";
-import USER_ROLE from "../../const"
-import { UserData } from "../../const"
+import USER_ROLE, { UserData } from "../../const"
 import Add from "./Add";
 import Edit from "./Edit";
 
